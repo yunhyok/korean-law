@@ -1,0 +1,8 @@
+{
+  "name": "korean-law",
+  "version": "0.1.0",
+  "description": "국가법령정보 공동활용 API 검색·본문 조회와 근거 인용 스킬",
+  "author": {"name": "yunhyok"},
+  "repository": "https://github.com/yunhyok/korean-law",
+  "license": "MIT"
+}

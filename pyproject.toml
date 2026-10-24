@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "korean-law-tools"
+version = "0.1.0"
+description = "Korean law Open API tools, MCP server, and agent skill"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "yunhyok"}]
+dependencies = []
+
+[project.optional-dependencies]
+mcp = ["mcp==2.3.0"]
+
+[project.scripts]
+korean-law = "korean_law.cli:main"
+korean-law-mcp = "korean_law.server:main"
+
+[project.urls]
+Repository = "https://github.com/yunhyok/korean-law"
+Issues = "https://github.com/yunhyok/korean-law/issues"
+
+[tool.setuptools.packages.find]
+where = ["skills/korean-law/scripts"]
+include = ["korean_law*"]

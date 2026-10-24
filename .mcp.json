@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "korean-law": {
+      "command": "uv",
+      "args": ["run", "--frozen", "--directory", "${CLAUDE_PLUGIN_ROOT}", "--extra", "mcp", "korean-law-mcp"]
+    }
+  }
+}

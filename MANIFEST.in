@@ -1,0 +1,7 @@
+include LICENSE README.md uv.lock .mcp.json .env.example
+recursive-include .claude-plugin *.json
+recursive-include skills *.md *.py *.yaml
+recursive-include scripts *.py
+recursive-include tests *.py
+global-exclude *.pyc
+global-exclude __pycache__

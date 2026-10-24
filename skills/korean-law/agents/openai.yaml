@@ -1,0 +1,4 @@
+interface:
+  display_name: "한국 법령정보"
+  short_description: "법제처 API로 법령과 판례를 조회하고 시행일과 원문 근거를 확인합니다"
+  default_prompt: "$korean-law 개인정보 보호법의 현행 제15조를 공식 원문과 시행일 기준으로 확인해 주세요."
