@@ -1,4 +1,19 @@
-# v0.1.0 검증 범위
+# 검증 범위
+
+## v0.1.1 — Workbench 통합
+
+검증일: 2026-10-24 (Asia/Seoul).
+
+- Windows / Python 3.12: 기존 `unittest` 22개 통과.
+- Codex CLI 0.153.4의 별도 `CODEX_HOME`에서 플러그인을 설치하고 `codex mcp list --json`으로 실제 설정 해석 확인. 플러그인 루트로 해석된 `cwd`와 `LAW_API_OC` 전달 목록 확인.
+- Codex가 해석한 실행 설정 및 Claude용 실행 설정으로 각각 MCP 초기화, 도구 3개 목록, `korean_law_setup` 호출 통과. 실제 OC 대신 테스트 문자열을 사용했으며 법제처 API는 호출하지 않음.
+- Claude 플러그인 및 Workbench 마켓플레이스 manifest 검증 통과.
+- 공개 소스 저장소는 `yunhyok/korean-law`, 설치 마켓플레이스는 비공개 `yunhyok/workbench`로 구분. 두 클라이언트의 설치 ID는 `korean-law@workbench`.
+- Codex 호환 manifest는 인수 안의 플러그인 경로 치환에 의존하지 않고 상대 `cwd: "."`를 사용한다. [해당 버전의 설정 파서](https://github.com/openai/codex/blob/rust-v0.153.4/codex-rs/codex-mcp/src/plugin_config.rs#L236-L292).
+
+실제 법제처 API 인증·조회와 재시작한 데스크톱 앱의 대화 내 도구 사용은 별도 확인이 필요하다.
+
+## v0.1.0
 
 검증일: 2026-10-24 (Asia/Seoul).
 

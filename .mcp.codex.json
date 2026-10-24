@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "korean-law": {
+      "command": "uv",
+      "args": ["run", "--frozen", "--extra", "mcp", "korean-law-mcp"],
+      "cwd": ".",
+      "env_vars": ["LAW_API_OC"]
+    }
+  }
+}

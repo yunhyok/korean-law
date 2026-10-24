@@ -1,0 +1,15 @@
+{
+  "name": "korean-law",
+  "version": "0.1.1",
+  "description": "국가법령정보 공동활용 API 검색·본문 조회와 근거 인용 스킬",
+  "author": {"name": "yunhyok"},
+  "repository": "https://github.com/yunhyok/korean-law",
+  "license": "MIT",
+  "interface": {
+    "displayName": "Korean Law",
+    "shortDescription": "한국 법령 검색·본문 조회와 시행일 기준 근거 확인",
+    "category": "Productivity"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.codex.json"
+}

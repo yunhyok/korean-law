@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "korean-law-tools"
-version = "0.1.0"
+version = "0.1.1"
 description = "Korean law Open API tools, MCP server, and agent skill"
 readme = "README.md"
 requires-python = ">=3.11"

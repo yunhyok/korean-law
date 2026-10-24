@@ -1,5 +1,6 @@
-include LICENSE README.md uv.lock .mcp.json .env.example
+include LICENSE README.md uv.lock .mcp.json .mcp.codex.json .env.example
 recursive-include .claude-plugin *.json
+recursive-include .codex-plugin *.json
 recursive-include skills *.md *.py *.yaml
 recursive-include scripts *.py
 recursive-include tests *.py
