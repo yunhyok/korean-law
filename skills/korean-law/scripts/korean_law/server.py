@@ -17,7 +17,7 @@ READ_ONLY = ToolAnnotations(
 )
 mcp = MCPServer(
     "korean-law",
-    version="0.1.0",
+    version="0.1.1",
     instructions=(
         "Search official Korean legal sources, then retrieve the relevant full text before citing. "
         "Prefer eflaw for effective laws; retain MST and effective date together. "

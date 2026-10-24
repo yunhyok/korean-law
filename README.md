@@ -2,7 +2,7 @@
 
 법제처 **국가법령정보 공동활용 Open API**를 Codex, Claude Code, Claude Desktop 등에서 사용하는 로컬 MCP 서버와 공용 스킬입니다. 법제처의 공식 제품이 아닌 독립 오픈소스 프로젝트입니다.
 
-**현재 상태: v0.1.0. 승인받은 OC가 없어 실제 API 성공 응답은 아직 검증하지 않았습니다.** 테스트의 법령 데이터는 합성 데이터입니다. 설치·MCP 통신·오류 처리 테스트와 실제 법제처 접속 검증은 구분합니다.
+**현재 상태: v0.1.1. 실제 API 성공 응답은 아직 검증하지 않았습니다.** 테스트의 법령 데이터는 합성 데이터입니다. 설치·MCP 통신·오류 처리 테스트와 실제 법제처 접속 검증은 구분합니다.
 
 ## 구성과 선택 이유
 
@@ -11,7 +11,7 @@
 | MCP 서버 | 여러 AI 클라이언트에서 같은 검색·본문 조회 함수를 호출 |
 | `korean-law` 스킬 | 현행/연혁·시행일 확인, 본문 조회, 정확한 근거 인용 절차 |
 | Python CLI | MCP 없이도 조회 가능. Python 표준 라이브러리만 사용 |
-| Claude Code 플러그인 | MCP와 스킬을 묶어서 GitHub에서 설치 |
+| Codex / Claude Code 플러그인 | MCP와 스킬을 묶어서 Workbench 마켓플레이스에서 설치 |
 
 설명만 있는 스킬보다 호출·오류 처리를 코드로 고정하는 편이 안정적이고, MCP만 제공하는 것보다 법령의 적용 시점과 인용 절차를 스킬로 안내하는 편이 적합합니다. 외부 서버, 데이터베이스, 웹 UI는 필요하지 않습니다. 공용 코드의 한 사본을 스킬 안에 두어 스킬만 복사해도 CLI가 동작합니다.
 
@@ -42,6 +42,21 @@ uv run --frozen --extra mcp korean-law doctor
 
 ### Codex
 
+마켓플레이스 주소는 [yunhyok/workbench](https://github.com/yunhyok/workbench)로 통일합니다. Workbench는 비공개 개인 마켓플레이스이므로 해당 저장소에 대한 GitHub 접근 권한이 필요합니다. 공개 소스와 릴리스는 이 `korean-law` 저장소에서 계속 관리합니다. Workbench 접근 권한이 없는 사용자는 아래 수동 설치를 사용할 수 있습니다.
+
+```sh
+codex plugin marketplace add https://github.com/yunhyok/workbench.git
+codex plugin add korean-law@workbench
+```
+
+이미 Workbench가 등록되어 있다면 첫 명령 대신 `codex plugin marketplace upgrade workbench`로 목록을 갱신합니다. 플러그인은 스킬과 MCP 서버를 함께 설치하고 `LAW_API_OC`를 전달합니다. 환경변수 설정 후 Codex를 완전히 종료했다가 다시 실행합니다.
+
+기존 수동 설치를 사용 중이라면 플러그인 설치와 MCP 동작을 확인한 다음 `codex mcp remove korean-law`로 기존 서버 등록을 제거하고, `~/.codex/skills/korean-law`를 스킬 검색 경로 밖에 백업해 중복 로드를 피합니다. OC 환경변수는 그대로 사용합니다.
+
+#### 수동 설치
+
+Workbench 플러그인과 수동 설치 중 하나만 사용합니다.
+
 공용 스킬 설치(기존 다른 스킬을 수정하지 않음):
 
 ```sh
@@ -67,9 +82,11 @@ env_vars = ["LAW_API_OC"]
 ### Claude Code 플러그인
 
 ```sh
-claude plugin marketplace add yunhyok/korean-law
-claude plugin install korean-law@yunhyok-law
+claude plugin marketplace add yunhyok/workbench
+claude plugin install korean-law@workbench
 ```
+
+이미 Workbench가 등록되어 있다면 `claude plugin marketplace update workbench`로 목록을 갱신합니다. 기존 `yunhyok-law`에서 이전하는 경우 위 설치가 성공한 뒤 `claude plugin marketplace remove yunhyok-law`를 실행하면 이전 마켓플레이스와 그 플러그인이 제거됩니다. 새 설치 ID는 `korean-law@workbench`입니다.
 
 `uv`가 PATH에 있고, Claude Code를 시작하는 환경에 `LAW_API_OC`가 있어야 합니다. 새 세션에서 `/korean-law:korean-law` 또는 자연어로 법령 조회를 요청합니다. 개발 중에는 `claude --plugin-dir "/absolute/path/korean-law"`로 로컬 플러그인을 읽을 수 있습니다. [Claude 플러그인 공식 문서](https://code.claude.com/docs/en/plugins-reference).
 
